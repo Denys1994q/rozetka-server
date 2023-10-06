@@ -11,7 +11,7 @@ passport.use(
         {
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL: "http://localhost:4444/google/callback",
+            callbackURL: "https://rozetka-server.onrender.com/google/callback",
         },
         async (accessToken, refreshToken, profile, done) => {
             const newUser = {
@@ -41,7 +41,7 @@ passport.use(
         {
             clientID: process.env.FB_CLIENT_ID,
             clientSecret: process.env.FB_CLIENT_SECRET,
-            callbackURL: "http://localhost:4444/facebook/callback",
+            callbackURL: "https://rozetka-server.onrender.com/facebook/callback",
         },
         async (accessToken, refreshToken, profile, done) => {
             const words = profile.displayName.split(" ");
