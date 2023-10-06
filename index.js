@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use('/assets', express.static('assets'));
 
 const corsOptions = {
-    origin: "https://rozetka-server.onrender.com", 
+    origin: "https://rozetka-clone-20axsfqxl-denys1994q.vercel.app", 
     credentials: true
 };
 
@@ -67,7 +67,7 @@ app.get(
           if (err) {
             return res.status(500).json({ message: "Помилка сервера" });
           }
-          res.send('<script>window.opener.postMessage("authSuccess", "http://localhost:4200");</script>');
+          res.send('<script>window.opener.postMessage("authSuccess", "https://rozetka-clone-20axsfqxl-denys1994q.vercel.app");</script>');
         });
       })(req, res, next);
     }
@@ -89,7 +89,7 @@ app.get("/auth/facebook", passport.authenticate("facebook"));
 app.get(
     "/facebook/callback",
     passport.authenticate("facebook", {
-        successRedirect: "http://localhost:4200",
+        successRedirect: "https://rozetka-clone-20axsfqxl-denys1994q.vercel.app",
         failureRedirect: "auth/failure",
     })
 );
