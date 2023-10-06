@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const InfoSchema = new mongoose.Schema({
-    heading: { type: String, required: true },
-    text: { type: String, required: true },
+    heading: { type: String },
+    text: { type: String },
 });
 
 const BannerSchema = new mongoose.Schema({
@@ -10,25 +10,25 @@ const BannerSchema = new mongoose.Schema({
 });
 
 const ReviewSchema = new mongoose.Schema({
-    author: { type: String, required: true },
-    date: { type: Date, required: true },
-    text: { type: String, required: true },
-    rating: { type: Number, required: true },
-    likes: { type: Number, required: true },
-    dislikes: { type: Number, required: true },
+    author: { type: String},
+    date: { type: Date},
+    text: { type: String },
+    rating: { type: Number },
+    likes: { type: Number },
+    dislikes: { type: Number },
     photo: { type: String },
 });
 
 const SearchStatusSchema = new mongoose.Schema({
-    searchPosition: { type: String, required: true },
-    title: { type: String, required: true },
-    option: { type: mongoose.Schema.Types.Mixed, required: true },
+    searchPosition: { type: String },
+    title: { type: String },
+    option: { type: mongoose.Schema.Types.Mixed },
 });
 
 const ProductSchema = new mongoose.Schema({
     title: { type: String, required: true },
     engName: { type: String, required: true },
-    id: { type: String, required: true },
+    // id: { type: String, required: true },
     image: { type: String, required: true },
     image2: { type: String },
     images: [BannerSchema],

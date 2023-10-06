@@ -10,6 +10,7 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import CategoryModel from "./models/Category.js";
 import ProductModel from "./models/Product.js";
+import UserModel from './models/User.js'
 
 function isLoggedIn(req, res, next) {
     req.user ? next() : res.sendStatus(401);
@@ -28,7 +29,6 @@ app.use(passport.session());
 dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
-// щоб після завантаження картинка коректно відображася в браузері за вказаним роутом
 app.use('/assets', express.static('assets'));
 
 const corsOptions = {
@@ -124,7 +124,38 @@ app.get("/categories/:id", async (req, res) => {
 // всі продукти
 app.get("/products", async (req, res) => {
     try {
+        const prod = await ProductModel.findOne({ _id: '6500037245d997489bf91596' });
+        prod.image = prod.image.replace(/ /g, "_");
+        console.log(prod)
+        await prod.save();
+        
         const products = await ProductModel.find();
+
+        for (const product of products) {
+            // if (product.image) {
+            //     product.image = product.image.replace(/\.\.\//g, "https://rozetka-server.onrender.com/");
+            //     console.log(product.image)
+            // }
+            // if (product.middleName) {
+            //     product.middleName = product.middleName.replace(/\.\.\//g, "http://localhost/");
+            // }
+
+            // if (product.images && Array.isArray(product.images)) {
+            //     // Оновити значення поля url у кожному об'єкті images
+            //     product.images.forEach(image => {
+            //         if (image.url) {
+            //             console.log('ded')
+            //             image.url = image.url.replace(/\.\.\//g, "http://localhost/");
+            //             console.log(image.url)
+            //         }
+            //     });
+            // }
+
+            // Зберегти оновлений продукт
+            await product.save();
+        }
+
+
         res.json(products);
     } catch (error) {
         console.error(error);
