@@ -29,7 +29,7 @@ dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
 // щоб після завантаження картинка коректно відображася в браузері за вказаним роутом
-// app.use("/uploads", express.static("uploads"));
+app.use('/assets', express.static('assets'));
 
 const corsOptions = {
     origin: "http://localhost:4200", // Додайте адресу вашого Angular додатка
