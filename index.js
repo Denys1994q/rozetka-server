@@ -21,10 +21,11 @@ app.use(
         secret: "cats",
         resave: false,
         saveUninitialized: true,
-        // cookie: {
-        //     sameSite: "None",
-        //     // secure: true,
-        // },
+        cookie: {
+            sameSite: "None",
+            secure: true,
+            domain: "onrender.com",
+        },
     })
 );
 app.use(passport.initialize());
