@@ -23,7 +23,7 @@ app.use(
         resave: false,
         saveUninitialized: true,
         cookie: {
-            sameSite: "none",
+            sameSite: "None",
             secure: true,
             domain: "rozetka-server.onrender.com",
         },
