@@ -25,7 +25,7 @@ app.use(
         cookie: {
             sameSite: "none",
             secure: true,
-            domain: "publicsuffix.org",
+            domain: "rozetka-server.onrender.com",
         },
     })
 );
