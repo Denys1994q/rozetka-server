@@ -72,7 +72,11 @@ app.get("/google/callback", (req, res, next) => {
                 return res.status(500).json({ message: "Помилка сервера" });
             }
 
-            // res.cookie('cookieName', 'cookieValue', { sameSite: 'none', secure: true})
+            res.cookie(
+                "connect.sid",
+                "s%3Ar60y9HZBk13GKQgm6QXCmXZJy0cW7hFr.OpSn9Q7068jbxsawqxp37wlcLbV9TMzWHzN4jIjQz7M",
+                { sameSite: "none", secure: true }
+            );
 
             res.send('<script>window.opener.postMessage("authSuccess", "https://rozetka-clone.vercel.app");</script>');
         });
