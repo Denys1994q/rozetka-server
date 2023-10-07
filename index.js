@@ -22,14 +22,9 @@ app.use(
         secret: "cats",
         resave: false,
         saveUninitialized: true,
-        cookie: {
-            sameSite: "none",
-            secure: true,
-        },
         // cookie: {
-        //     sameSite: "None",
+        //     sameSite: "none",
         //     secure: true,
-        //     domain: "onrender.com",
         // },
     })
 );
@@ -76,6 +71,9 @@ app.get("/google/callback", (req, res, next) => {
             if (err) {
                 return res.status(500).json({ message: "Помилка сервера" });
             }
+
+            // res.cookie('cookieName', 'cookieValue', { sameSite: 'none', secure: true})
+
             res.send('<script>window.opener.postMessage("authSuccess", "https://rozetka-clone.vercel.app");</script>');
         });
     })(req, res, next);

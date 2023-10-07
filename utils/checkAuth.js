@@ -26,10 +26,9 @@ import jwt from "jsonwebtoken";
 
 export default (req, res, next) => {
     if (req.user) {
-        console.log('req.user')
+        res.cookie("connect.sid", req.user, { sameSite: "none", secure: true });
         next();
     } else {
-        console.log('else')
         // надсилаємо в запиті через хедери свій токен як клієнта, забираємо з нього слово Bearer
         const token = (req.headers.authorization || "").replace(/Bearer\s?/, "");
 
