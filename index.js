@@ -23,9 +23,9 @@ app.use(
         resave: false,
         saveUninitialized: true,
         cookie: {
-            sameSite: "None",
+            sameSite: "none",
             secure: true,
-            domain: "(https://publicsuffix.org/",
+            domain: "(https://publicsuffix.org",
         },
     })
 );
