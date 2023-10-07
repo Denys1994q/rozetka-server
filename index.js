@@ -124,6 +124,18 @@ app.get("/categories/:id", async (req, res) => {
 app.get("/products", async (req, res) => {
     try {
         const products = await ProductModel.find();
+
+        // const product = await ProductModel.findOne({ _id: '6500037245d997489bf91596' })
+
+        // for (const product of products) {
+        //     product.reviews_data.forEach(review => {
+        //         if (review.photo) {
+        //             review.photo = review.photo.replace(/ /g, "_")
+        //         }
+        //     })
+        //     await product.save()
+        // }
+
         res.json(products);
     } catch (error) {
         console.error(error);
