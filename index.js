@@ -67,6 +67,10 @@ app.get(
           if (err) {
             return res.status(500).json({ message: "Помилка сервера" });
           }
+          res.cookie("myCookieName", "myCookieValue", {
+            sameSite: "None", 
+            secure: true, 
+        });
           res.send('<script>window.opener.postMessage("authSuccess", "https://rozetka-clone.vercel.app");</script>');
         });
       })(req, res, next);
