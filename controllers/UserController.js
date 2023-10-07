@@ -98,7 +98,6 @@ export const login = async (req, res) => {
 
 export const getMe = async (req, res) => {
     try {
-        res.cookie("connect.sid", 's%3Ar60y9HZBk13GKQgm6QXCmXZJy0cW7hFr.OpSn9Q7068jbxsawqxp37wlcLbV9TMzWHzN4jIjQz7M', { sameSite: "none", secure: true });
         if (req.user) {
             const userId = req.user._id;
             // res.send(req.user);
