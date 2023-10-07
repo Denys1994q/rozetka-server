@@ -193,6 +193,19 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/assets", express.static("assets"));
 
+// Використовуємо cookie-session для сесій
+app.set("trust proxy", 1);
+app.use(
+    cookieSession({
+        name: "__session",
+        keys: ["key1"],
+        maxAge: 24 * 60 * 60 * 1000, // 24 години
+        secure: true, // Важливо для SameSite=None; Secure
+        httpOnly: true,
+        sameSite: "none", // Важливо для SameSite=None; Secure
+    })
+);
+
 const corsOptions = {
     origin: "https://rozetka-clone.vercel.app",
     credentials: true,
@@ -212,18 +225,6 @@ app.post("/auth/login", loginValidation, handleValidationErrors, UserController.
 app.get("/auth/me", checkAuth, UserController.getMe);
 app.put("/auth/update", checkAuth, UserController.updateUser);
 app.delete("/auth/delete", checkAuth, UserController.deleteUser);
-
-// Використовуємо cookie-session для сесій
-app.use(
-    cookieSession({
-        name: "__session",
-        keys: ["key1"],
-        maxAge: 24 * 60 * 60 * 1000, // 24 години
-        secure: true, // Важливо для SameSite=None; Secure
-        // httpOnly: true,
-        sameSite: "none", // Важливо для SameSite=None; Secure
-    })
-);
 
 // авторизація через гугл
 app.get("/auth/google", passport.authenticate("google", { scope: ["email", "profile"] }));
