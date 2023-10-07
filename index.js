@@ -23,7 +23,7 @@ app.use(
         saveUninitialized: true,
         cookie: {
             sameSite: "None",
-            secure: true, 
+            // secure: true,
         },
     })
 );
@@ -32,11 +32,11 @@ app.use(passport.session());
 dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
-app.use('/assets', express.static('assets'));
+app.use("/assets", express.static("assets"));
 
 const corsOptions = {
-    origin: "https://rozetka-clone.vercel.app", 
-    credentials: true
+    origin: "https://rozetka-clone.vercel.app",
+    credentials: true,
 };
 
 app.use(cors(corsOptions));
@@ -56,27 +56,24 @@ app.delete("/auth/delete", checkAuth, UserController.deleteUser);
 
 // авторизація через гугл
 app.get("/auth/google", passport.authenticate("google", { scope: ["email", "profile"] }));
-app.get(
-    "/google/callback",
-    (req, res, next) => {
-      passport.authenticate("google", (err, user, info) => {
+app.get("/google/callback", (req, res, next) => {
+    passport.authenticate("google", (err, user, info) => {
         if (err) {
-          return res.status(500).json({ message: "Помилка сервера" });
+            return res.status(500).json({ message: "Помилка сервера" });
         }
         if (!user) {
-          return res.status(401).json({ message: "Не вдалося авторизуватися" });
+            return res.status(401).json({ message: "Не вдалося авторизуватися" });
         }
         // Успішна авторизація
         req.logIn(user, err => {
-          if (err) {
-            return res.status(500).json({ message: "Помилка сервера" });
-          }
-          res.send('<script>window.opener.postMessage("authSuccess", "https://rozetka-clone.vercel.app");</script>');
+            if (err) {
+                return res.status(500).json({ message: "Помилка сервера" });
+            }
+            res.send('<script>window.opener.postMessage("authSuccess", "https://rozetka-clone.vercel.app");</script>');
         });
-      })(req, res, next);
-    }
-  );
-  
+    })(req, res, next);
+});
+
 app.get("/auth/logout", (req, res, next) => {
     req.logout(function (err) {
         if (err) {
