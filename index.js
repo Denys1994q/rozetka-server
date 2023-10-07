@@ -17,10 +17,6 @@ function isLoggedIn(req, res, next) {
 
 const app = express();
 
-// if (process.env.NODE_ENV === "production") {
-//     app.set("trust proxy", 1); // trust first proxy
-//     sessionConfig.cookie.secure = true; // serve secure cookies
-// }
 app.use(
     session({
         secret: "cats",
@@ -28,6 +24,7 @@ app.use(
         saveUninitialized: true,
         cookie: {
             sameSite: "none",
+            secure: true,
         },
         // cookie: {
         //     sameSite: "None",
