@@ -220,7 +220,7 @@ app.use(
         keys: ["key1"],
         maxAge: 24 * 60 * 60 * 1000, // 24 години
         secure: true, // Важливо для SameSite=None; Secure
-        httpOnly: true,
+        // httpOnly: true,
         sameSite: "none", // Важливо для SameSite=None; Secure
     })
 );
