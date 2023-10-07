@@ -25,6 +25,7 @@ app.use(
         cookie: {
             sameSite: "None",
             secure: true,
+            domain: "(https://publicsuffix.org/",
         },
     })
 );
